@@ -4,17 +4,15 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
+const WAITLIST_URL = "https://forms.gle/YKtnnvbPhbG6e8zZ7";
+
 const NAV_LINKS = [
   { label: "Problem", href: "#problem" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "Team", href: "#team" },
 ];
 
-interface NavbarProps {
-  onWaitlistClick?: () => void;
-}
-
-export default function Navbar({ onWaitlistClick }: NavbarProps) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -69,12 +67,14 @@ export default function Navbar({ onWaitlistClick }: NavbarProps) {
 
           {/* CTA */}
           <div className="hidden md:flex items-center">
-            <button
-              onClick={onWaitlistClick}
+            <a
+              href={WAITLIST_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-inter text-sm font-semibold px-5 py-2.5 bg-primary-gold text-card-dark rounded-sm hover:bg-deep-gold transition-colors duration-200 tracking-wide uppercase"
             >
               Join Waitlist
-            </button>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -109,15 +109,15 @@ export default function Navbar({ onWaitlistClick }: NavbarProps) {
                   {link.label}
                 </a>
               ))}
-              <button
-                onClick={() => {
-                  onWaitlistClick?.();
-                  setMobileOpen(false);
-                }}
-                className="font-inter text-sm font-semibold px-5 py-3 bg-primary-gold text-card-dark rounded-sm uppercase tracking-wide mt-2"
+              <a
+                href={WAITLIST_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="font-inter text-sm font-semibold px-5 py-3 bg-primary-gold text-card-dark rounded-sm uppercase tracking-wide mt-2 text-center"
               >
                 Join Waitlist
-              </button>
+              </a>
             </div>
           </motion.div>
         )}

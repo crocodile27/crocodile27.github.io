@@ -1,38 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { ArrowDown, Sparkles } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 
-interface HeroProps {
-  onWaitlistClick?: () => void;
-}
+const WAITLIST_URL = "https://forms.gle/YKtnnvbPhbG6e8zZ7";
 
-export default function Hero({ onWaitlistClick }: HeroProps) {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const handleEmailSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !email.includes("@")) return;
-    setLoading(true);
-    // Store to localStorage as placeholder
-    setTimeout(() => {
-      try {
-        const existing = JSON.parse(
-          localStorage.getItem("lumeria_waitlist") || "[]"
-        );
-        existing.push({ email, timestamp: new Date().toISOString() });
-        localStorage.setItem("lumeria_waitlist", JSON.stringify(existing));
-      } catch {}
-      setSubmitted(true);
-      setLoading(false);
-      setEmail("");
-    }, 600);
-  };
-
+export default function Hero() {
   const handleSeeHowItWorks = (e: React.MouseEvent) => {
     e.preventDefault();
     document
@@ -93,7 +68,7 @@ export default function Hero({ onWaitlistClick }: HeroProps) {
         />
       </div>
 
-      {/* Decorative top-left and top-right corner lines */}
+      {/* Decorative corner lines */}
       <div className="absolute top-24 left-6 md:left-16 opacity-30 pointer-events-none">
         <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
           <path d="M4 4 L4 28 M4 4 L28 4" stroke="#C9A84C" strokeWidth="1" />
@@ -147,12 +122,14 @@ export default function Hero({ onWaitlistClick }: HeroProps) {
           variants={itemVariants}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
-          <button
-            onClick={onWaitlistClick}
-            className="w-full sm:w-auto font-inter font-semibold px-8 py-3.5 bg-primary-gold text-card-dark rounded-sm hover:bg-deep-gold transition-all duration-200 tracking-wide uppercase text-sm shadow-lg shadow-primary-gold/20 hover:shadow-primary-gold/30"
+          <a
+            href={WAITLIST_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto font-inter font-semibold px-8 py-3.5 bg-primary-gold text-card-dark rounded-sm hover:bg-deep-gold transition-all duration-200 tracking-wide uppercase text-sm shadow-lg shadow-primary-gold/20 hover:shadow-primary-gold/30 text-center"
           >
             Join the Waitlist
-          </button>
+          </a>
           <button
             onClick={handleSeeHowItWorks}
             className="w-full sm:w-auto font-inter font-semibold px-8 py-3.5 border border-primary-gold text-primary-gold rounded-sm hover:bg-primary-gold/10 transition-all duration-200 tracking-wide uppercase text-sm"
@@ -161,55 +138,13 @@ export default function Hero({ onWaitlistClick }: HeroProps) {
           </button>
         </motion.div>
 
-        {/* Inline email capture */}
-        <motion.div variants={itemVariants} className="max-w-md mx-auto">
-          {submitted ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="flex items-center justify-center gap-2 py-3 text-primary-gold font-inter text-sm"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                className="flex-shrink-0"
-              >
-                <circle cx="8" cy="8" r="7" stroke="#C9A84C" strokeWidth="1.5" />
-                <path
-                  d="M5 8L7 10L11 6"
-                  stroke="#C9A84C"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              You&apos;re on the list. We&apos;ll be in touch soon.
-            </motion.div>
-          ) : (
-            <form onSubmit={handleEmailSubmit} className="flex gap-2">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                className="flex-1 font-inter text-sm px-4 py-3 bg-white/80 border border-primary-gold/30 rounded-sm text-dark-text placeholder:text-dark-text/40 focus:outline-none focus:border-primary-gold focus:ring-1 focus:ring-primary-gold/30 transition-all"
-              />
-              <button
-                type="submit"
-                disabled={loading}
-                className="font-inter text-sm font-semibold px-5 py-3 bg-card-dark text-primary-gold rounded-sm hover:bg-card-dark/80 transition-colors disabled:opacity-60 whitespace-nowrap"
-              >
-                {loading ? "..." : "Notify Me"}
-              </button>
-            </form>
-          )}
-          <p className="font-inter text-xs text-dark-text/40 mt-2 text-center">
-            No spam. Early access only.
-          </p>
-        </motion.div>
+        {/* Waitlist link hint */}
+        <motion.p
+          variants={itemVariants}
+          className="font-inter text-xs text-dark-text/40 text-center"
+        >
+          No spam. Early access only.
+        </motion.p>
       </motion.div>
 
       {/* Scroll indicator */}
