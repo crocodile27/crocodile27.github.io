@@ -15,6 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://crocodile27.github.io/lumeria-web"),
   title: "Lumeria — Illuminate Your Skin",
   description:
     "Lumeria is the first at-home skin diagnostic tool fusing clinical-grade multispectral imaging with AI to deliver personalized recommendations and direct dermatologist support.",
