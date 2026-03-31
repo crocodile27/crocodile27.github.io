@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #F5F0E8;
+    --foreground: #3D2B1F;
+  }
+
+  body {
+    background-color: #F5F0E8;
+    color: #3D2B1F;
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #F5F0E8;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #C9A84C;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8B6914;
+  }
+}
+
+@layer utilities {
+  /* Gold shimmer text effect */
+  .gold-shimmer-text {
+    background: linear-gradient(
+      90deg,
+      #8B6914 0%,
+      #C9A84C 25%,
+      #F5D788 50%,
+      #C9A84C 75%,
+      #8B6914 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gold-shimmer 3s linear infinite;
+  }
+
+  /* Ornate border pattern */
+  .ornate-border-top {
+    border-top: 1px solid #C9A84C;
+    position: relative;
+  }
+
+  .ornate-border-top::before {
+    content: '◆';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #C9A84C;
+    background: inherit;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  .ornate-border-bottom {
+    border-bottom: 1px solid #C9A84C;
+    position: relative;
+  }
+
+  .ornate-border-bottom::after {
+    content: '◆';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #C9A84C;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  /* Gold text gradient */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #C9A84C 0%, #F5D788 50%, #8B6914 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Additional ornate border utility for sections */
+  .section-ornate-border {
+    border-image: linear-gradient(90deg, transparent, #C9A84C, transparent) 1;
+  }
+
+  /* Card hover glow */
+  .card-gold-glow:hover {
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.15), 0 0 40px rgba(201, 168, 76, 0.08);
+  }
+}
+
+/* Gold shimmer keyframe */
+@keyframes gold-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes radial-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
